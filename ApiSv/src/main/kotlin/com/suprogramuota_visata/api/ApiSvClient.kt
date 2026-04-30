@@ -6,6 +6,9 @@ import com.suprogramuota_visata.api.data.repositories.TypeRepositoryImpl
 import com.suprogramuota_visata.api.domain.repositories.AuthRepository
 import com.suprogramuota_visata.api.domain.repositories.TypeRepository
 import io.ktor.client.*
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.serialization.kotlinx.json.json
 
 /**
  * The main entry point for the ApiSv library.
@@ -24,9 +27,9 @@ class ApiSvClient {
         // AuthRepository sukuriamas pirmiausia, nes jo reikės HTTP klientui, kad ištrauktų JWT tokeną
         val tempAuthRepository = AuthRepositoryImpl(
             // Laikinas klientas tik Auth operacijoms, kol pagrindinis klientas nesukonfigūruotas
-            io.ktor.client.HttpClient(io.ktor.client.engine.cio.CIO) {
-                install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
-                    io.ktor.serialization.kotlinx.json.json()
+            HttpClient(CIO) {
+                install(ContentNegotiation) {
+                    json()
                 }
             }
         )

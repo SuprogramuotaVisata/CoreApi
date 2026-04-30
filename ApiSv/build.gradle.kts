@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.0.0" // Changed to stable Kotlin version, 2.3.10 doesn't exist yet
-    kotlin("plugin.serialization") version "2.0.0"
+    kotlin("jvm") version "2.1.10"
+    kotlin("plugin.serialization") version "2.1.10"
 }
 
 group = "com.suprogramuota_visata"
